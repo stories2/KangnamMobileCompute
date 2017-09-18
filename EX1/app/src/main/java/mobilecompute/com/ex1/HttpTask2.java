@@ -1,7 +1,5 @@
 package mobilecompute.com.ex1;
 
-import android.widget.EditText;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -17,15 +15,13 @@ import static mobilecompute.com.ex1.LogManager.PrintLog;
 public class HttpTask2 {
 
     MainActivity.OnCompletionListener listener;
-    EditText etMemo;
 
     public HttpTask2() {
 
     }
 
-    public HttpTask2(MainActivity.OnCompletionListener listener, EditText etMemo) {
+    public HttpTask2(MainActivity.OnCompletionListener listener) {
         this.listener = listener;
-        this.etMemo = etMemo;
     }
 
     public void RequestOpenApi(String code, String type, String phone, String api) {

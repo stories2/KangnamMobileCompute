@@ -100,10 +100,16 @@ public class MainActivity extends Activity {
 
             @Override
             public void onComplete(ApiResponse result) {
+                String resultResponse = "";
                 ApiRecursiveResponse recursiveResponse = result.getResponse();
                 Toast.makeText(getApplicationContext(), recursiveResponse.getMsg(), Toast.LENGTH_SHORT).show();
-                PrintLog("MainActivity", "onComplete", "msg: " + recursiveResponse.getMsg()
-                        + " phone: " + recursiveResponse.getPhone(), LOG_LEVEL_INFO);
+
+                resultResponse = "msg: " + recursiveResponse.getMsg()
+                        + " phone: " + recursiveResponse.getPhone();
+
+                PrintLog("MainActivity", "btnAttendClick/onComplete", resultResponse, LOG_LEVEL_INFO);
+
+                etMemo.setText(resultResponse);
             }
         }, etMemo);
 
