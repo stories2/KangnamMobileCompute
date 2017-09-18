@@ -1,7 +1,6 @@
 package mobilecompute.com.ex1;
 
 import android.os.AsyncTask;
-import android.util.Log;
 import android.widget.EditText;
 
 import java.io.BufferedReader;
@@ -58,7 +57,6 @@ public class HttpTask extends AsyncTask<String, Void, String> {
         }
         catch (Exception err) {
             line = err.getMessage().toString();
-            Log.d("test", "error: " + err.getMessage());
             PrintLog("HttpTask", "doInBackground", "Error: " + err.getMessage(), LOG_LEVEL_ERROR);
         }
         return line;
