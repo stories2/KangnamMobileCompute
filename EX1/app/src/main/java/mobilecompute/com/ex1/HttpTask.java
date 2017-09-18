@@ -38,7 +38,6 @@ public class HttpTask extends AsyncTask<String, Void, String> {
         String line = "";
         try {
             URL url = new URL(strings[0]);
-            Log.d("test", "url: " + strings[0]);
             PrintLog("HttpTask", "doInBackground", "request url: " + strings[0], LOG_LEVEL_INFO);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
