@@ -111,7 +111,7 @@ public class MainActivity extends Activity {
 
                 etMemo.setText(resultResponse);
             }
-        }, etMemo);
+        });
 
         httpTask2.RequestOpenApi("mobilecomputing", "begin", "01056351845", "qwerty12345");
     }
