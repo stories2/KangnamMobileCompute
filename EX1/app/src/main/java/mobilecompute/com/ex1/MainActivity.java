@@ -30,6 +30,13 @@ public class MainActivity extends Activity {
         ivIcon = (ImageView) findViewById(R.id.imageView);
         button = (Button) findViewById(R.id.button);
 
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PrintLog("MainActivity", "onCreate", "button click type 1", LOG_LEVEL_INFO);
+            }
+        });
+
         ButtonClick clicker = new ButtonClick();
 
         button.setOnClickListener(clicker);
