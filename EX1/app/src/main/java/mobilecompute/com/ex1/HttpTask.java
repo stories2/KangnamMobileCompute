@@ -70,7 +70,7 @@ public class HttpTask extends AsyncTask<String, Void, String> {
     @Override
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
-
+        PrintLog("HttpTask", "onPostExecute", "result response: " + s, LOG_LEVEL_INFO);
         if(listener != null) {
             listener.onComplete(s);
             etMemo.setText(s);
