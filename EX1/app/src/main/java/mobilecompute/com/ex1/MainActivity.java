@@ -3,6 +3,7 @@ package mobilecompute.com.ex1;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -18,6 +19,7 @@ public class MainActivity extends Activity {
 
     EditText etMemo;
     ImageView ivIcon;
+    Button button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +28,11 @@ public class MainActivity extends Activity {
 
         etMemo = (EditText)findViewById(R.id.editText);
         ivIcon = (ImageView) findViewById(R.id.imageView);
+        button = (Button) findViewById(R.id.button);
+
+        ButtonClick clicker = new ButtonClick();
+
+        button.setOnClickListener(clicker);
     }
 
     public void btnHttpClick(View v) {
@@ -114,6 +121,14 @@ public class MainActivity extends Activity {
         });
 
         httpTask2.RequestOpenApi("mobilecomputing", "begin", "01056351845", "qwerty12345");
+    }
+
+    class ButtonClick implements View.OnClickListener {
+
+        @Override
+        public void onClick(View view) {
+            PrintLog("ButtonClick", "onClick", "onclick type 2", LOG_LEVEL_INFO);
+        }
     }
 
     interface OnCompletionListener {
