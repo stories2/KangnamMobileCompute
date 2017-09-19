@@ -15,11 +15,11 @@ import static mobilecompute.com.ex1.DefineManager.LOG_LEVEL_ERROR;
 import static mobilecompute.com.ex1.DefineManager.LOG_LEVEL_INFO;
 import static mobilecompute.com.ex1.LogManager.PrintLog;
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements View.OnClickListener {
 
     EditText etMemo;
     ImageView ivIcon;
-    Button button;
+    Button button, button2, button3, button4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +29,9 @@ public class MainActivity extends Activity {
         etMemo = (EditText)findViewById(R.id.editText);
         ivIcon = (ImageView) findViewById(R.id.imageView);
         button = (Button) findViewById(R.id.button);
+        button2 = (Button) findViewById(R.id.button2);
+        button3 = (Button) findViewById(R.id.button3);
+        button4 = (Button) findViewById(R.id.button4);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -39,7 +42,9 @@ public class MainActivity extends Activity {
 
         ButtonClick clicker = new ButtonClick();
 
-        button.setOnClickListener(clicker);
+        button2.setOnClickListener(clicker);
+
+        button4.setOnClickListener(this);
     }
 
     public void btnHttpClick(View v) {
@@ -128,6 +133,11 @@ public class MainActivity extends Activity {
         });
 
         httpTask2.RequestOpenApi("mobilecomputing", "begin", "01056351845", "qwerty12345");
+    }
+
+    @Override
+    public void onClick(View view) {
+        PrintLog("MainActivity", "onClick", "button press type 4", LOG_LEVEL_INFO);
     }
 
     class ButtonClick implements View.OnClickListener {
