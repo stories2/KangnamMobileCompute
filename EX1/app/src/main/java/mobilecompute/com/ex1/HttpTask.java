@@ -48,7 +48,7 @@ public class HttpTask extends AsyncTask<String, Void, String> {
             while(true) {
                 String temp = reader.readLine();
                 if(temp != null) {
-                    line = line + line;
+                    line = line + temp;
                 }
                 else {
                     break;
