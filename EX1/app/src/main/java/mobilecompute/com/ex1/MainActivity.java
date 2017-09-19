@@ -138,6 +138,17 @@ public class MainActivity extends Activity implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         PrintLog("MainActivity", "onClick", "button press type 4", LOG_LEVEL_INFO);
+
+        new Thread() {
+            public void run() {
+                int i;
+                for(i = 0; i < 100000000; i += 1) {
+
+                }
+                PrintLog("MainActivity", "onClick/run", "process done", LOG_LEVEL_INFO);
+            }
+        }.start();
+        PrintLog("MainActivity", "onClick", "button press type 4 end", LOG_LEVEL_INFO);
     }
 
     class ButtonClick implements View.OnClickListener {
