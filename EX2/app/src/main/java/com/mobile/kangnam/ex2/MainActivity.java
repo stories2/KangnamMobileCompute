@@ -7,6 +7,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -37,13 +39,34 @@ public class MainActivity extends Activity {
     }
 
     public void onClickWeather(View view) {
-        new HttpTask().execute("http://api.openweathermap.org/data/2.5/weather?lat=37.276101&lon=127.130824&APPID=70c844fdcfeb46b7f41aa7b47278e97e");
+        new HttpTask(new JsonParser() {
+            @Override
+            public void ConvertJsonWeather(String jsonData) {
+                try {
+                    JSONObject jsonObject = new JSONObject(jsonData);
+                    Log.d(TAG, "Result code: " + jsonObject.getString("cod"));
+                }
+                catch (Exception err) {
+                    Log.e(TAG, "Error: " + err.getMessage());
+                }
+            }
+        }).execute("http://api.openweathermap.org/data/2.5/weather?lat=37.276101&lon=127.130824&APPID=70c844fdcfeb46b7f41aa7b47278e97e");
+    }
+
+    interface JsonParser {
+        public void ConvertJsonWeather(String jsonData) ;
     }
 
     class HttpTask extends AsyncTask<String, Void, String> {
 
+        JsonParser jsonParser;
+
         public HttpTask() {
             super();
+        }
+        public HttpTask(JsonParser jsonParser) {
+            super();
+            this.jsonParser = jsonParser;
         }
 
         @Override
@@ -81,6 +104,10 @@ public class MainActivity extends Activity {
             super.onPostExecute(s);
 
             Log.d(TAG, "background result: " + s);
+
+            if(jsonParser != null) {
+                jsonParser.ConvertJsonWeather(s);
+            }
         }
 
         @Override
