@@ -36,6 +36,10 @@ public class MainActivity extends Activity {
         new HttpTask().execute("http://www.google.co.kr");
     }
 
+    public void onClickWeather(View view) {
+        new HttpTask().execute("http://api.openweathermap.org/data/2.5/weather?lat=37.276101&lon=127.130824&APPID=70c844fdcfeb46b7f41aa7b47278e97e");
+    }
+
     class HttpTask extends AsyncTask<String, Void, String> {
 
         public HttpTask() {
