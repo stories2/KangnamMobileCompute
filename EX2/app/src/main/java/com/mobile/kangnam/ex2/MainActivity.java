@@ -45,6 +45,8 @@ public class MainActivity extends Activity {
                 try {
                     JSONObject jsonObject = new JSONObject(jsonData);
                     Log.d(TAG, "Result code: " + jsonObject.getString("cod"));
+
+                    etxtResult.setText("Result code: " + jsonObject.getString("cod"));
                 }
                 catch (Exception err) {
                     Log.e(TAG, "Error: " + err.getMessage());
