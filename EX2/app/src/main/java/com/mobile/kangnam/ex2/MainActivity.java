@@ -7,6 +7,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
 public class MainActivity extends Activity {
 
     public static final String TAG = "test";
@@ -23,9 +29,11 @@ public class MainActivity extends Activity {
 
     public void onClickHttp(View view) {
         Log.d(TAG, "onclick http");
-
+/*
         HttpTask httpTask = new HttpTask();
-        httpTask.execute("http://www.google.co.kr");
+        httpTask.execute("http://www.google.co.kr");*/
+
+        new HttpTask().execute("http://www.google.co.kr");
     }
 
     class HttpTask extends AsyncTask<String, Void, String> {
@@ -37,6 +45,25 @@ public class MainActivity extends Activity {
         @Override
         protected String doInBackground(String... strings) {
             Log.d(TAG, "do in background url: " + strings[0]);
+
+            try {
+                URL url = new URL(strings[0]);
+
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setRequestMethod("GET");
+
+                InputStream inputStream = httpURLConnection.getInputStream();
+
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
+                String htmlSource = "", temp = "";
+                while((temp = bufferedReader.readLine()) != null) {
+                    htmlSource = htmlSource + temp;
+                }
+                return htmlSource;
+            }
+            catch (Exception err) {
+                Log.d(TAG, "Error in doinbackground: " + err.getMessage());
+            }
             return null;
         }
 
@@ -48,6 +75,8 @@ public class MainActivity extends Activity {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
+
+            Log.d(TAG, "background result: " + s);
         }
 
         @Override
