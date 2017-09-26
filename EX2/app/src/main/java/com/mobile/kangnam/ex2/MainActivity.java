@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -46,7 +47,12 @@ public class MainActivity extends Activity {
                     JSONObject jsonObject = new JSONObject(jsonData);
                     Log.d(TAG, "Result code: " + jsonObject.getString("cod"));
 
-                    etxtResult.setText("Result code: " + jsonObject.getString("cod"));
+                    JSONArray weather = jsonObject.getJSONArray("weather");
+                    JSONObject weather0 = weather.getJSONObject(0);
+
+                    etxtResult.append("Result code: " + jsonObject.getString("cod") + "\n");
+                    etxtResult.append("Weather: " + weather0.getString("main") + "\n");
+                    etxtResult.append("Icon: " + weather0.getString("icon") + "\n");
                 }
                 catch (Exception err) {
                     Log.e(TAG, "Error: " + err.getMessage());
