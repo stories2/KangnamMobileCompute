@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -51,6 +52,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
                 break;
             case R.id.btnList:
                 Log.d(TAG, "List button clicked");
+                OnClickList();
                 break;
             default:
                 break;
@@ -100,6 +102,59 @@ public class MainActivity extends Activity implements View.OnClickListener{
                     Log.d(TAG, "Error in on post execute: " + err.getMessage());
                 }
             }
-        }.execute("http://i2max-ml.xyz:8080/openapi.jsp");
+        }.execute("http://i2max-ml.xyz:8080/openapi.jsp?method=add&name=" + etxtName.getText().toString());
+    }
+
+    public void OnClickList() {
+        new AsyncTask<String, Void, String>() {
+
+            @Override
+            protected String doInBackground(String... params) {
+                Log.d(TAG, "getting data url: " + params[0]);
+                try {
+                    URL url = new URL(params[0]);
+
+                    HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                    httpURLConnection.setRequestMethod("GET");
+
+                    InputStream inputStream = httpURLConnection.getInputStream();
+
+                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
+                    String htmlSource = "", temp = "";
+                    while((temp = bufferedReader.readLine()) != null) {
+                        htmlSource = htmlSource + temp;
+                    }
+                    return htmlSource;
+                }
+                catch (Exception err) {
+                    Log.d(TAG, "Error in doinBackground: " + err.getMessage());
+                }
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(String s) {
+                super.onPostExecute(s);
+                if(s == null) {
+                    Log.d(TAG, "Response is null");
+                    return;
+                }
+                try {
+                    Log.d(TAG, "Response data: " + s);
+                    JSONObject jsonObject = new JSONObject(s);
+                    etxtResult.setText(jsonObject.getString("msg") + "\n");
+                    JSONArray infoArray = jsonObject.getJSONArray("info");
+                    int i;
+                    for(i = 0; i < infoArray.length(); i += 1) {
+                        if(infoArray.getString(i) != null) {
+                            etxtResult.append(infoArray.getString(i) + "\n");
+                        }
+                    }
+                }
+                catch (Exception err) {
+                    Log.d(TAG, "Error in on post execute: " + err.getMessage());
+                }
+            }
+        }.execute("http://i2max-ml.xyz:8080/openapi.jsp?method=list");
     }
 }
