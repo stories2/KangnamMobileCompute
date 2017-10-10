@@ -81,12 +81,16 @@ public class MainActivity extends Activity implements View.OnClickListener{
                 catch (Exception err) {
                     Log.d(TAG, "Error in doinBackground: " + err.getMessage());
                 }
-                return "Ok";
+                return null;
             }
 
             @Override
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);
+                if(s == null) {
+                    Log.d(TAG, "Response is null");
+                    return;
+                }
                 try {
                     Log.d(TAG, "Response data: " + s);
                     JSONObject jsonObject = new JSONObject(s);
