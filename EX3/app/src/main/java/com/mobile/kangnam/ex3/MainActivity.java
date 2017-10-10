@@ -1,6 +1,7 @@
 package com.mobile.kangnam.ex3;
 
 import android.app.Activity;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -38,6 +39,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
         switch (v.getId()) {
             case R.id.btnAdd:
                 Log.d(TAG, "Add button clicked");
+                OnClickAdd();
                 break;
             case R.id.btnList:
                 Log.d(TAG, "List button clicked");
@@ -45,5 +47,16 @@ public class MainActivity extends Activity implements View.OnClickListener{
             default:
                 break;
         }
+    }
+
+    public void OnClickAdd() {
+        new AsyncTask<String, Void, String>() {
+
+            @Override
+            protected String doInBackground(String... params) {
+                Log.d(TAG, "getting data url: " + params[0]);
+                return "Ok";
+            }
+        }.execute("http://172.16.11.71:8080");
     }
 }
