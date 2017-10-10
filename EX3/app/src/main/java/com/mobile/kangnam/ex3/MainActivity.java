@@ -57,6 +57,6 @@ public class MainActivity extends Activity implements View.OnClickListener{
                 Log.d(TAG, "getting data url: " + params[0]);
                 return "Ok";
             }
-        }.execute("http://172.16.11.71:8080");
+        }.execute("http://i2max-ml.xyz:8080");
     }
 }
