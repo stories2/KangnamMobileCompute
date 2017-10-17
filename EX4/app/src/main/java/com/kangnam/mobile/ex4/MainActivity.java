@@ -35,6 +35,6 @@ public class MainActivity extends Activity {
         Log.d(TAG, "stt button clicked");
 
         String targetText = etxtBeforeStt.getText().toString();
-        tts.speak(targetText, TextToSpeech.QUEUE_FLUSH, null);
+        tts.speak(targetText, TextToSpeech.QUEUE_FLUSH, null);//QUEUE_FLUSH : 클린하고 적용, QUEUE_ADD : 기존에 있는거에 추가 적용
     }
 }
