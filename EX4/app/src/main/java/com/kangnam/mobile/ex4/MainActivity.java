@@ -51,6 +51,7 @@ public class MainActivity extends Activity {
     }
 
     public void OnWebBtnClickListener(View view) {
-
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.i2max-ml.xyz"));
+        startActivity(intent);
     }
 }
