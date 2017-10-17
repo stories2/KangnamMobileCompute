@@ -5,18 +5,22 @@ import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 
 import java.util.Locale;
 
 public class MainActivity extends Activity {
 
     TextToSpeech tts;
+    EditText etxtBeforeStt;
     String TAG = "EX4";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        etxtBeforeStt = (EditText) findViewById(R.id.etxtBeforeStt);
 
         tts = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {//초기화 과정이 끝났는지 확인하는 인터페이스이기 때문에
             @Override
@@ -29,5 +33,8 @@ public class MainActivity extends Activity {
 
     public void OnSttBtnClickListener(View view) {
         Log.d(TAG, "stt button clicked");
+
+        String targetText = etxtBeforeStt.getText().toString();
+        tts.speak(targetText, TextToSpeech.QUEUE_FLUSH, null);
     }
 }
