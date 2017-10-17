@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
+import java.net.URLEncoder;
 import java.util.Locale;
 
 public class MainActivity extends Activity {
@@ -52,6 +53,19 @@ public class MainActivity extends Activity {
 
     public void OnWebBtnClickListener(View view) {
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.i2max-ml.xyz"));
+        startActivity(intent);
+    }
+
+    public void OnMapBtnClickListener(View view) {
+        String place = "";
+        try {
+            place = URLEncoder.encode("강남대학교" , "UTF-8" );
+            Log.d(TAG, "map: " + place);
+        }
+        catch (Exception err) {
+            Log.d(TAG, "Error in OnMapBtnClickListener: " + err.getMessage());
+        }
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.google.co.kr/maps/place/" + place));
         startActivity(intent);
     }
 }
