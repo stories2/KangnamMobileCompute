@@ -28,7 +28,7 @@ public class MainActivity extends Activity {
                 Log.d(TAG, "tts init");
                 tts.setLanguage(Locale.KOREAN);//셋팅 해주는건 초기화 후에 해줘야 잘 동작함
 
-                tts.speak("오렌지 톡톡 톡 트로피카나", TextToSpeech.QUEUE_FLUSH, null);
+                tts.speak("영웅은 죽지 않아요", TextToSpeech.QUEUE_FLUSH, null);
             }
         });
     }
