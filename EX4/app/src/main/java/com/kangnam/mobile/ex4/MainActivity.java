@@ -1,6 +1,8 @@
 package com.kangnam.mobile.ex4;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
@@ -41,5 +43,14 @@ public class MainActivity extends Activity {
 
         String targetText = etxtBeforeStt.getText().toString();
         tts.speak(targetText, TextToSpeech.QUEUE_ADD, null);//QUEUE_FLUSH : 클린하고 적용, QUEUE_ADD : 기존에 있는거에 추가 적용
+    }
+
+    public void OnCallBtnClickListener(View view) {
+        Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:8282"));
+        startActivity(intent);
+    }
+
+    public void OnWebBtnClickListener(View view) {
+
     }
 }
