@@ -27,6 +27,8 @@ public class MainActivity extends Activity {
             public void onInit(int status) {
                 Log.d(TAG, "tts init");
                 tts.setLanguage(Locale.KOREAN);//셋팅 해주는건 초기화 후에 해줘야 잘 동작함
+
+                tts.speak("오렌지 톡톡 톡 트로피카나", TextToSpeech.QUEUE_FLUSH, null);
             }
         });
     }
@@ -35,6 +37,6 @@ public class MainActivity extends Activity {
         Log.d(TAG, "stt button clicked");
 
         String targetText = etxtBeforeStt.getText().toString();
-        tts.speak(targetText, TextToSpeech.QUEUE_FLUSH, null);//QUEUE_FLUSH : 클린하고 적용, QUEUE_ADD : 기존에 있는거에 추가 적용
+        tts.speak(targetText, TextToSpeech.QUEUE_ADD, null);//QUEUE_FLUSH : 클린하고 적용, QUEUE_ADD : 기존에 있는거에 추가 적용
     }
 }
