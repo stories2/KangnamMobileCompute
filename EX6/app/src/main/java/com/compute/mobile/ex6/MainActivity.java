@@ -4,12 +4,18 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
+
+import java.util.List;
+import java.util.Locale;
 
 public class MainActivity extends Activity{
 
@@ -87,6 +93,21 @@ public class MainActivity extends Activity{
             }
         };
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 10000, 0, locationListener);
-        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 10000, 0, locationListener2);
+//        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 10000, 0, locationListener2);
+    }
+
+    public void BtnOnGpsClickListener(View view) {
+        Geocoder geocoder = new Geocoder(this, Locale.KOREAN);
+        try {
+            List<Address> addressList = geocoder.getFromLocationName("강남대", 3);
+            for(Address address : addressList) {
+                Log.d("Test", "address: " + address.getAddressLine(0) + " " + address.getAddressLine(1) +
+                " lat: " + address.getLatitude() + " long: " + address.getLongitude());
+
+            }
+        }
+        catch (Exception err) {
+            Log.d("Test", "getting address fail");
+        }
     }
 }
